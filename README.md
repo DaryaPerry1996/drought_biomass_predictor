@@ -32,14 +32,14 @@ Biomass data from 2018-2024: the samples were collected from rainout shelters un
 Treatment D66 recieved 33% of the naturally occurring precipitation( 66% of the plot was covered such that only 33% of rainfall reached the plots)
 The biomass samples were harvested yearly in April then dried and weighed in the lab.
 
-##Relation of annual above ground biomass measurements with varying Drought condition :
+## Relation of annual above ground biomass measurements with varying Drought condition :
 ![image](https://github.com/user-attachments/assets/2a946101-e390-46bc-8fa8-632d5448b3a2)
 
  
 As can be seen in the above plot the relation between the level of drought and the biomass cannot be described in a linear formula. 
 (add the total reduction of biomass to see that there exists a cause effect relationship)
 This study aims to uncover the nature of influence and the effects of climate factors (temperature, rainfall patterns) on the biomass results.
-##Meteorological data and Climatic indices:
+## Meteorological data and Climatic indices:
 2021-2024: field measurements from Matta (from Zentra Cloud database). This dataset contains hourly VPD (vapor pressure deficit)(Kpa), temp(C°), precipitation(mm), this was reformatted into a dataset containing daily minimum maximum and average values of temperature and daily total precipitation and maximum precipitation rate
 2003-2014 : field measurements from Matta. This dataset contains daily precipitation (mm) and daily average minimum and maximum temperature (C°) and daily relative humidity (RH) (%) measurements. The RH measurements were recorded only from 2011.
 2014-2021: due to some gaps in the Matta meteorological database, these climate indices were extracted from Rosh Tzurim and Tzur Hadassa meteorological stations located near the Matta plots.
@@ -58,7 +58,7 @@ Using linear regression we received the following correlation between relative h
   ![image](https://github.com/user-attachments/assets/fac4ff47-4510-4b3d-a189-a0a57840a02b)
 
 We supplemented the missing RH values in the Matta data, from 2004-2011 and from 2015-2020 with the relative humidity in Rosh Tzurim after transformation according to the equation extracted from the linear regression.
-###VPD Climate Indice:
+### VPD Climate Indice:
 Air can only hold a certain amount of water vapor at a given temperature before it starts condensing back to liquid water (in forms such as dew or rain). The maximum amount of water vapor that air can hold at a certain temperature is called “saturation vapor pressure” or SVP. First we calculate svp as follows:
 ![image](https://github.com/user-attachments/assets/0672da68-4c8f-4f9a-bf9f-643fede65ec1)
 
@@ -72,13 +72,13 @@ VPD = SVP – AVP
 The climate indices were extracted in two different time frames:
 •	Hydrological Climate indices: the climate indices calculated only from the hydrological year. The period of time commonly used for which precipitation totals are measured this is the period of time with the highest correlation between precipitation and negligible changes in storage (soil water). We defined a hydrological year from October to April
 •	Seasonal climate indices extracted separately according to each season which we defined as follows- Autumn : October-November, Winter: December-February, Spring: March-April
-###Combining and Adjusting the data
+### Combining and Adjusting the data
 We combined the Biomass and Climate Data so that every Biomass sample was joined with the climate indices of the hydrologic year preceding its harvest. In a separate dataframe we combined each Biomass sample with the seasonal climate indices of the year preceding its harvest.
 After combining the Biomass sample data with the indices of the appropriate time frame we adjusted the cumulative precipitation values and the total rainy days according to each treatment.
 3 more indices were calculated:
 Drought indice which we defined as the percent of natural precipitation that the sample received.
 SDII which is the The Simple Daily Intensity Index (SDII), the average rainfall rate on “wet days” (PPT ≥ 1mm), measured in mm/day, during the period of interest (year, season or month).
-###Climate Indices:
+### Climate Indices:
 For each given time period the following climate indices were extracted:
 •	Cummulative precipitation- total sum of all daily precipitation values
 •	Simple Daily Intensity Index (SDII):  the average rainfall rate on “wet days” (PPT ≥ 1mm), measured in mm/day, during the period of interest (year, season or month).
@@ -91,13 +91,13 @@ For each given time period the following climate indices were extracted:
 •	Cumulative precipitation of previous year.
 •	Drought indice  defined as the percent of natural precipitation that the sample received.
 
-##Training the Random Forest Regressor
+## Training the Random Forest Regressor
 We trained two different models and compared them:
 •	one model trained on the seasonal climate indices.
 •	one models trained on the hydrological yearly climate indices
 We used one hot encoding for non numerical values the frequency values this translated categorical data into indicative binary data in this case translated a frequency column into two binary columns frequency NF detailing 1 if the type of frequency was a natural frequency and 0 if not and Frequency HF detailing 1 if the treatment applied was HF and 0 otherwise (the third column LF doesn’t add information and can be extrapolated from the other two columns)
 We split the data into test and train data such that the test size was 20% of the total data, then trained and evaluated a random forest regressor on the 4 different data categories during which we ran the model training on several different indice combinations to determine if certain indices negatively effect the models reliability.
-##Results
+## Results
 Model trained on Hydrological Indices with only natural frequency treatments:
 
 ![image](https://github.com/user-attachments/assets/a8360cbb-bbfd-4b70-8cfd-dafcf921e381)
@@ -112,10 +112,10 @@ The coefficient of variation of all, training and validation were all close to e
 
 ![image](https://github.com/user-attachments/assets/ce4c61db-2f32-4ea3-a17d-e8b0acc62250)
 
-###Reliability of the models:
+### Reliability of the models:
 All models consistently returned a non negative r-squared value , because of the level of randomness in the model creation this value varies across multiple runtimes but was generally larger then 0.5 in most models. this indicates the models capabilities of explaining over 50% in the variance in biomass. All models were significantly better at predicting the biomass results then using the mean.
 The points discussed in conclusions were consistent in all runtimes.
-###Feature Importance:
+### Feature Importance:
 The feature importance was analysed using SHAP and Gini importance,
 Gini Importance: The importance of a feature is computed as the (normalized) total reduction of the criterion brought by that feature. The criterion is the Gini impurity, which measures the impurity of a node in a decision tree, with more substantial weight to the most important features. Therefore, Gini importance is also known as the total decrease in node impurity.
 SHAP values are a common way of getting a consistent and objective explanation of how each feature impacts the model's prediction.
@@ -127,36 +127,37 @@ the importance calculated by Gini importance and by SHAP were highly similar. wi
 ![image](https://github.com/user-attachments/assets/b64af77f-1de1-41dd-87f8-9cc3b31b54ba)
 
  
-###Feature correlation:
+### Feature correlation:
 Using Pearsons correlation we analysed the dependence between the different features in the model the results were not indicative of any interaction not easily explained by natural weather behaviour, such as the DTR of spring being correlated to the DTR of winter, or correlations that were improbable such as one between the average temp and the drought treatment applied ,such a correlation is by chance as there is no possible interaction between the two indices. There were also correlations between indices for example SDII and cumulative precipitation which is used in order to calculate the SDII. The following images are the heatmaps graphing the Pearson correlation between the features.
 
 ![image](https://github.com/user-attachments/assets/9975180d-4fbf-44e4-8d51-1a42a9ebf581)
 
  
-###SHAP Summary ScatterPlot
+### SHAP Summary ScatterPlot
 Scatter plot explanation: Y-axis indicates the feature names in order of importance from top to bottom. X-axis represents the SHAP value, which indicates the degree of change in log odds. Each point represents a row of data from the original dataset. The colour of each point on the graph represents the value of the corresponding feature, with red indicating high values and blue indicating low values.
 For instance, In both of the seasonal scatter plots below we can see in the winter average temperature the blue points, low feature in this case low temperature points correspond to high SHAP values meaning they have a positive effect on biomass and the red points correspond with high temperature values have a negative effect on biomass. Furthermore we can see an opposite directional correlation in the DTR high DTR has a positive effect on biomass and low DTR has a negative effect on biomass.
 
-![image](https://github.com/user-attachments/assets/2bc1dbc1-e499-4e31-8efc-ccd12ac90f5e)
+![image](https://github.com/user-attachments/assets/6ce7ae02-5387-4894-836a-ffd4f1c1d0e0)
+
 
 ![image](https://github.com/user-attachments/assets/6dec7d59-ec2f-4354-8128-80cba0bbccc3)
 
 
  
-##Discussion:
-###Drought percentage:
+## Discussion:
+### Drought percentage:
 During the hydrological periods the drought level had the relatively high feature importance over other models, the correlation is identical in all the models a positive correlation between the percent of natural precipitation and the biomass. This is indicative of the definition of a hydrological year or water year which takes into account months with the highest correlation between precipitation and negligible changes in storage (soil water). The correlation was positive between percent of natural precipitation and Biomass in this model and all other models.
 Daily Temperature Range and Average Temperature:
 In both hydrological models the daily temperature range was most important consistently and the correlation is a positive correlation, increase in the daily temperature range correlates with increase in the biomass.
 In general across all models the Daily Temperature Range had very high or highest significance. From a seasonal perspective the Spring and Winter daily temperature range had highest significance consistently.
 Across all models the relationship between the DTR and the biomass was a positive one, increase in the DTR results in increase in the biomass, this gives an indication that during spring and winter months high temperatures followed by low temperatures have a positive effect on biomass whereas an increase in the average winter temperatures was shown to have a negative effect on biomass as can be seen in both the nf and the af seasonal scatterplots. furthermore, we can see that the winter and spring average temp were most significant off all seasonal average temperatures.
-###Spring and Winter DTR
+### Spring and Winter DTR
 in the Seasonal models the Spring DTR and Winter DTR were of high importance consistentl.
 Previous Year Precipitation:
 In both the hydrological models the previous years precipitation was consistently more important than the current yearly precipitation. This could be because of soil water retention properties which help to minimize the effects of temporary droughts.
-###Vapor Pressure deficit:
+### Vapor Pressure deficit:
  In the seasonal models Springs VPD was the most important and in the hydrological model the VPD was similarly important. In the hydrological model the VPD was generally of greater importance then precipitation indices, this could be an indication that the atmospheric water budget has a greater effect than precipitation on the plants hydration.
 
-##Conclusions
+## Conclusions
 To summarize the various models trained on the data showed reliability (R squared generally above 0.5)  and detailed a non linear relation between key climatic features such as Daily temperature range Vapor Pressure Deficit and previous year precipitation. Our results highlight that Biomass in Mediterranean climates is related to these climate variables; and the variance explained by the models greatly increased when including these indices. The relationship between the Biomass and the Climate is a complex one but ML models like this one can be used in order to better determine key factors in this complex relationship. Our model showed the Mediterranean landscape had a relatively strong resilience to drought factors and the feature importance of the drought was not most important in determining biomass. There are many possible biological explanations for this as was detailed such as the evapotranspiration from the plant having a stronger effect than precipitation and the water retention properties of the soil.
 
