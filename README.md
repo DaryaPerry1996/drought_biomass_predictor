@@ -1,4 +1,4 @@
-# drought_biomass_predictor
+# Drought Biomass Random Forest Regresssor
 
 ## Introduction
 ### Background
