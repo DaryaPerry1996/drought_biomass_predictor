@@ -1,36 +1,185 @@
-# Drought Biomass Random Forest Regresssor
+# 1. Introduction
 
-## Introduction
-### Background
-In the Mediterranean climate, plants have evolved under conditions of low soil-water and nutrient availabilities and have acquired a series of adaptive traits that, in turn exert strong feedback on soil fertility, structure, and protection. As a result, plant-soil systems constitute complex interactive webs where these adaptive traits allow plants to maximize the use of scarce resources.( Sardans et al. 2013) . The long-term evolutionary adaptation to drought of Mediterranean plants allows them to cope with moderate increases of drought without significant losses of production and survival in some species.
-Mediterranean-type climates are defined by temperate, wet winters, and warm or hot dry summers, winter storms bring precipitation and the summers are dry. (Seager et al. 2019)
-All Mediterranean Regions are overall semiarid as a result of the highly seasonal precipitation and long dry summers and all struggle with water resources at the best of times. Lying between the more arid subtropics and the more humid extratropics they are locations of impactful climate variability and are highly vulnerable to intense and protracted droughts (e.g., Hurrell 1995; Smith et al. 2000; Risbey et al. 2009; Seager et al. 2014a; Cook et al. 2016; Garreaud et al. 2017).
-The effects of climate change on Mediterranean ecosystems are profound and multifaceted, impacting soil moisture, pasture productivity  and biogeochemical cycles. These changes threaten the sustainability and functionality of these ecosystems, necessitating urgent attention and adaptive management strategies.
-Rising global temperatures have led to decreased soil moisture, particularly in Mediterranean regions, which is critical for crop growth and ecosystem stability (Huang et al. 2024). The reduction in soil moisture can lead to increased aridity, affecting plant health and agricultural productivity.
- Climate change is altering the productivity and nutritional quality of pastures in Mediterranean silvopastoral systems, with increased temperatures and reduced rainfall negatively impacting biomass and nutrient composition(Martins-Noguerol et al., 2023).
+## 1.1. Background
+In the Mediterranean climate, plants have evolved under conditions of low soil-water and nutrient availabilities and have acquired a series of adaptive traits that, in turn exert strong feedback on soil fertility, structure, and protection. As a result, plant-soil systems constitute complex interactive webs where these adaptive traits allow plants to maximize the use of scarce resources.( Sardans et al. 2013) . The long-term evolutionary adaptation to drought of Mediterranean plants allows them to cope with moderate increases of drought without significant losses of production and survival in some species.  
+Mediterranean-type climates are defined by temperate, wet winters, and warm or hot dry summers, winter storms bring precipitation and the summers are dry. (Seager et al. 2019)  
+All Mediterranean Regions are overall semiarid as a result of the highly seasonal precipitation and long dry summers and all struggle with water resources at the best of times. Lying between the more arid subtropics and the more humid extratropics they are locations of impactful climate variability and are highly vulnerable to intense and protracted droughts (e.g., Hurrell 1995; Smith et al. 2000; Risbey et al. 2009; Seager et al. 2014a; Cook et al. 2016; Garreaud et al. 2017).  
+The effects of climate change on Mediterranean ecosystems are profound and multifaceted, impacting soil moisture, pasture productivity  and biogeochemical cycles. These changes threaten the sustainability and functionality of these ecosystems, necessitating urgent attention and adaptive management strategies.  
+Rising global temperatures have led to decreased soil moisture, particularly in Mediterranean regions, which is critical for crop growth and ecosystem stability (Huang et al. 2024). The reduction in soil moisture can lead to increased aridity, affecting plant health and agricultural productivity.  
+Climate change is altering the productivity and nutritional quality of pastures in Mediterranean silvopastoral systems, with increased temperatures and reduced rainfall negatively impacting biomass and nutrient composition(Martins-Noguerol et al., 2023).  
 Mediterranean forests are experiencing disruptions in carbon, nitrogen, and phosphorus cycles due to combined effects of drought and warming, leading to significant ecological consequences(Serrano et al. 2023). These changes can alter nutrient availability and soil organic matter, impacting overall ecosystem functioning.
+
 ### Projected changes:
-The Mediterranean region is one of the most responsive areas to climate change and was identified as a major “hot-spot” based on global climate change analyses.
-The Mediterranean has long stood out in successive generations of global climate models (GCMs) as being particularly sensitive to rising concentrations of greenhouse gases. Models overwhelmingly project, across all scenarios, a large reduction in precipitation, more than in other land regions in relative terms (Fig. 1b) (Giorgi and Lionello 2008; Planton et al. 2012). A large part of that decline occurs during winter, with enhanced drying over northwestern Africa [from 230% to 240% in December–February (DJF) precipitation] and the eastern Mediterranean (from 220% to 225%). In summer, significant warming and drying is also projected for the northern Mediterranean (Brogli et al. 2019).
-All models predict a steady and significant warming across all study areas, accompanied by moderate changes in total annual precipitation, though with some seasonal variations. Future drought patterns in the Mediterranean region were analyzed based on the maximum duration of heat waves, their peak temperatures, and the number of consecutive dry days. The findings indicate an expected increase in both the duration and intensity of heat waves, as well as a rise in the maximum number of consecutive dry days across most study areas. (Valeria Todaro et al., 2022)
-The projected impacts of climate change pose significant risks to both societies and the environment in the Mediterranean region. A decline in future precipitation combined with increased evapotranspiration could easily trigger critical water shortages, especially in areas where water resources are already at precarious levels (Iglesias et al. 2007; García-Ruiz et al. 2011). Rising temperatures associated with climate change are expected to affect human health (Diffenbaugh et al. 2007), disrupt plant life cycles (Gordo and Sanz 2010), and elevate fire risk (Moriondo et al. 2006). Of particular concern are the consequences for agriculture, with studies highlighting potential reductions in crop yields and food security (Iglesias et al. 2011; Bindi and Olesen 2011; Tanasijevic et al. 2014; Saadi et al. 2015). In essence, climate change is likely to decrease the availability of crucial ecosystem services (Schröter et al. 2005).
+The Mediterranean region is one of the most responsive areas to climate change and was identified as a major “hot-spot” based on global climate change analyses.  
+The Mediterranean has long stood out in successive generations of global climate models (GCMs) as being particularly sensitive to rising concentrations of greenhouse gases. Models overwhelmingly project, across all scenarios, a large reduction in precipitation, more than in other land regions in relative terms (Fig. 1b) (Giorgi and Lionello 2008; Planton et al. 2012). A large part of that decline occurs during winter, with enhanced drying over northwestern Africa [from 230% to 240% in December–February (DJF) precipitation] and the eastern Mediterranean (from 220% to 225%). In summer, significant warming and drying is also projected for the northern Mediterranean (Brogli et al. 2019).  
+All models predict a steady and significant warming across all study areas, accompanied by moderate changes in total annual precipitation, though with some seasonal variations. Future drought patterns in the Mediterranean region were analyzed based on the maximum duration of heat waves, their peak temperatures, and the number of consecutive dry days. The findings indicate an expected increase in both the duration and intensity of heat waves, as well as a rise in the maximum number of consecutive dry days across most study areas. (Valeria Todaro et al., 2022)  
+The projected impacts of climate change pose significant risks to both societies and the environment in the Mediterranean region. A decline in future precipitation combined with increased evapotranspiration could easily trigger critical water shortages, especially in areas where water resources are already at precarious levels (Iglesias et al. 2007; García-Ruiz et al. 2011). Rising temperatures associated with climate change are expected to affect human health (Diffenbaugh et al. 2007), disrupt plant life cycles (Gordo and Sanz 2010), and elevate fire risk (Moriondo et al. 2006). Of particular concern are the consequences for agriculture, with studies highlighting potential reductions in crop yields and food security (Iglesias et al. 2011; Bindi and Olesen 2011; Tanasijevic et al. 2014; Saadi et al. 2015). In essence, climate change is likely to decrease the availability of crucial ecosystem services (Schröter et al. 2005).  
 While the evidence highlights the severe impacts of climate change on Mediterranean ecosystems, it is also essential to consider the potential for adaptive management strategies that could mitigate these effects and promote ecosystem resilience. Understanding the nature and effect of Climate relations on mediterranean ecosystems is crucial in order to develop such strategies.
-### Random Forest and other ML Models:
-Machine learning models are highly useful in understanding the effects of climate on biomass due to their ability to handle complex datasets, integrate diverse variables, and provide accurate predictions. These models can effectively analyze the intricate relationships between climate variables and biomass, offering insights that traditional methods may not capture.
- Machine learning models, such as random forests and support vector machines, can manage large datasets with numerous variables, including both biotic and abiotic factors, which are crucial for accurate biomass estimation( e.g: Huntington et al. 2020 , Liu et al. 2023 , Xiao He et al. 2022 ·)
-These models have demonstrated high accuracy in predicting biomass under various climate scenarios. For instance, random forest models have been used to predict sorghum yields and forest biomass with high precision, considering factors like greenhouse gas emissions and irrigation practices (e.g:  Huntington et al. 2020 , Xiao He et al. 2022, · Ghosh et al. 2018 )
-These characteristics make random forest regressors an excellent candidate for providing Insights into Climate-Biomass Relationships.
+
+## 1.2. Random Forest and other ML Models:
+Machine learning models are highly useful in understanding the effects of climate on biomass due to their ability to handle complex datasets, integrate diverse variables, and provide accurate predictions. These models can effectively analyze the intricate relationships between climate variables and biomass, offering insights that traditional methods may not capture.  
+Machine learning models, such as random forests and support vector machines, can manage large datasets with numerous variables, including both biotic and abiotic factors, which are crucial for accurate biomass estimation( e.g: Huntington et al. 2020 , Liu et al. 2023 , Xiao He et al. 2022 ·)  
+These models have demonstrated high accuracy in predicting biomass under various climate scenarios. For instance, random forest models have been used to predict sorghum yields and forest biomass with high precision, considering factors like greenhouse gas emissions and irrigation practices (e.g:  Huntington et al. 2020 , Xiao He et al. 2022, · Ghosh et al. 2018 )  
+These characteristics make random forest regressors an excellent candidate for providing Insights into Climate-Biomass Relationships.  
 This study aims to examine the effects of climate factors (temperature, rainfall patterns)  under the different drought treatments and categorize complex relations between climate factors on above-ground biomass in Mediterranean climate . More specifically, our study focuses on achieving the following objectives: (1) to utilize a random forest regressor model to predict above-ground biomass (2) to extract influental climate  factors and describe the nature of their influence.
-## Materials and Methods:
-Biomass data from 2002-2010:
-Biomass samples were cultivated in plots in the matta rainout shelters under three different drought treatments I,C,D. During this time period the biomass was harvested in 15 plots (5 per treatment) with 10 replications per plot, each replication is a 20 x 20 cm quadrate within the plots.
-Treatment I was irrigated 33% more then the natural precipitation.
-Treatment C received the naturally occurring precipitation.
-Treatment D received 66% of the naturally occurring precipitation ( 33% of the plot was covered such that only 66% of rainfall reached the plots)
-Biomass data from 2011-2017- The samples were collected from rainout shelters under three different treatments I,C,D this data did not include the individual samples but rather the mean of all plots and replications per year per treatment.
-Biomass data from 2018-2024: the samples were collected from rainout shelters under four different treatments  D,D66-HF,D66-LF,C from 2018 until 2021(treatments D66-HF,D66-LF were not used in the final training of the model) . from 2021 all D treatments were changed to D66 treatments. During this time period the biomass was harvested in 5 Blocks with 4 plots(Treatments) per Block 5 Replications per plot (one treatment per plot or 4 treatments per block). 
-Treatment D66 recieved 33% of the naturally occurring precipitation( 66% of the plot was covered such that only 33% of rainfall reached the plots)
-The biomass samples were harvested yearly in April then dried and weighed in the lab.
+
+# 2. Materials and Methods:
+
+## 2.1. Research scope:
+In this study, a RF regression model was developed to estimate the above ground biomass of  in Mediterranean climate using various climate parameters as the model predictor. We performed a validation study of a biomass prediction model that estimates seasonal biomass response based on climatic conditions.  
+The study procedure is shown in **Fig. 1**. First, the climate data was preprocessed to compute indices related to seasonal and interannual climate variability. Next, an RF algorithm was introduced for model building, and a grid search method was introduced to derive accurate model parameters. Data was partitioned using nested cross-validation, with 5 folds in the outer loop for model evaluation and 5 folds in the inner loop for hyperparameter optimization. Stratified splitting was performed  to maintain balanced distributions across folds.  The final step consisted of model evaluation. Performance evaluation was performed based on the coefficient of determination (R²), root mean squared error (RMSE), mean squared error (MSE), and mean absolute error (MAE), which were utilized to quantify the evaluation results. Finally, in the interpretation process, the concepts of SHAP and Gini importance were introduced to assess the relative contributions of the climate indices to biomass prediction.
+
+**Figure 1. Research flowchart.**  
+`![Figure 1. Research flowchart](images/flowchart.png)`
+
+## 2.2. Study area
+
+## 2.3. Data collection
+The training data for model estimation were derived from long-term field experiments conducted at the Matta rainout-shelter site. All observations used in this study span 2002–2024. We selected this period to construct a dataset that combines continuous biomass measurements with consistent meteorological records and derived climate indices. Experimental units consisted of replicated plots subjected to drought treatments, and annual above-ground biomass was harvested each spring (April), oven-dried, and weighed to obtain the target variable for model estimation. Climate indices related to precipitation, temperature, humidity, and drought conditions were computed from daily meteorological observations and used as input variables.  
+From 2002 to 2010, biomass was collected in 15 plots (5 per treatment) with 10 within-plot quadrat replications (20×20 cm). Treatments included irrigated (I; ~+33% of ambient precipitation), control (C; ambient precipitation), and drought (D; ~66% of ambient precipitation reaching the plot via shelter coverage). From 2011 to 2017, the experiment maintained the three treatments (I, C, D); annual data were available as plot/treatment means per year. From 2018 to 2024, the design employed 5 blocks × 4 plots per block (one treatment per plot; 5 replications per plot). During 2018–2021, the shelter scheme included D, D66-HF, D66-LF, and C; for model training, only the treatments consistent with the final design were retained. Beginning in 2021, all drought treatments followed the D66 protocol (≈33% of ambient precipitation; 66% rain exclusion). The final dataset pairs each biomass observation with climate indices from the preceding hydrological or seasonal windows, as described below.
+
+### 2.3.1. Meteorological data and climate indices
+Meteorological data were compiled from multiple sources to ensure coverage across the full study period. For 2021–2024, in-field measurements from the Matta station (Zentra Cloud) provided hourly temperature, precipitation, and humidity (used to compute VPD). Historical Matta records supplied daily precipitation and daily minimum/mean/maximum temperature for 2003–2014, with relative humidity available from 2011 onward. To bridge gaps from 2014–2021, daily observations were obtained from nearby stations (Rosh Tzurim and Tzur Hadassa). Station series were harmonized to the Matta site by linear regressions; transformed values were then aggregated to daily summaries consistent with the in-field record.  
+Climate indices were derived from these daily data. For analysis focused on antecedent water availability, we defined a hydrological year as October–April and computed indices within that window. For seasonal analyses, indices were additionally calculated for Autumn (Oct–Nov), Winter (Dec–Feb), and Spring (Mar–Apr). Variables included cumulative precipitation, temperature summaries, counts of consecutive dry/wet days, number of rain events, daily temperature range (DTR), the Simple Daily Intensity Index (SDII; mean intensity on wet days, ≥1 mm), vapor pressure deficit (VPD; computed from temperature-dependent saturation vapor pressure and relative humidity via $ \mathrm{VPD}=\mathrm{SVP}-\mathrm{AVP} $, with $ \mathrm{AVP}=\mathrm{RH}\times\mathrm{SVP}/100 $), and previous-year precipitation. A drought index was defined as the percentage of natural precipitation reaching each treatment (e.g., ≈33% for D66). All features generated and used in this work and brief descriptions of their sources are summarized in **Table 1**.
+
+**Table 1. Descriptions of the model variables and data sources**  
+
+| Features                                  | Abbreviations | Units | Data sources |
+|-------------------------------------------|---------------|-------|-------------|
+| Cumulative precipitation                   | CP            | mm    | Matta meteorological station; Rosh Tzurim / Tzur Hadassa (gap-filled, linear regression adjusted) |
+| Simple Daily Intensity Index               | SDII          | mm/day| Derived from daily precipitation records |
+| Average temperature                        | AvgT          | °C    | Matta meteorological station; Rosh Tzurim (adjusted) |
+| Consecutive dry days                       | CDD           | days  | Derived from daily precipitation records |
+| Consecutive wet days                       | CWD           | days  | Derived from daily precipitation records |
+| Number of rain events                      | NRE           | count | Derived from daily precipitation records |
+| Daily temperature range                    | DTR           | °C    | Derived from daily Tmin and Tmax |
+| Vapor pressure deficit                     | VPD           | kPa   | Computed from temperature & relative humidity (Matta station; Rosh Tzurim adjusted) |
+| Previous-year precipitation                | PYP           | mm    | Derived from adjusted precipitation records |
+| Percentage of Natural Precipitation (treatment) | PNP       | %     | Experimental design (rainout shelters, Matta site) |
+| **Target / Output**                        |               |       |             |
+| Annual above-ground biomass                | Biomass       | g/m²  | Matta rainout shelter harvests (2002–2024) |
+
+### 2.3.2. Data alignment and adjustments
+For model construction, each annual biomass observation was linked to the climate indices of the preceding hydrological year (primary analysis) or to the corresponding seasonal indices (secondary analysis). Treatment‐specific adjustments were applied so that cumulative precipitation and rainy-day counts reflected the effective rainfall reaching each plot under the shelter configuration. The resulting database comprises year-by-year biomass (target) with matched climate indices (predictors) prepared for Random Forest regression and subsequent validation.
+
+## 2.4. Model construction and evaluation
+We developed a supervised learning workflow to predict a continuous outcome from climate-related predictors using a Random Forest (RF) regressor implemented in scikit-learn.
+
+### 2.4.1. Random forest regression
+Although many regression techniques exist (e.g., support vector regression, regularized linear models, and gradient boosting), RF was adopted because it captures non-linear relations and higher-order interactions, handles mixed data types with minimal preprocessing, and remains robust with relatively small samples datasets (Rhodes, Cutler, & Moon, 2023; Han, Williamson, & Fong, 2021).  
+Random forests are ensemble learning algorithms that construct multiple decision trees using bootstrapped samples and random subsets of features, aggregating their predictions to improve accuracy and generalization. This approach allows random forests to model complex, nonlinear relationships between variables, as each tree can capture different aspects of the data's structure and interactions, and the ensemble mitigates overfitting by averaging across diverse models (Schonlau & Zou, 2020). The method is particularly adept at handling nonlinear interactions because the tree-based structure naturally partitions the feature space in a flexible, data-driven manner, enabling the detection of intricate variable relationships without explicit specification. Furthermore, random forests are well-suited for small datasets and high-dimensional settings, as their nonparametric nature does not require distributional assumptions, and the aggregation of multiple trees reduces variance and the risk of overfitting. Empirical studies have demonstrated that random forests maintain high predictive accuracy and robustness in small sample sizes and complex data structures, outperforming many traditional methods in these scenarios (add citation).  
+A tree-based model involves recursively partitioning the given dataset into two groups based on a certain criterion until a predetermined stopping condition is met. At the bottom of decision trees are so-called leaf nodes or leaves (Schonlau & Zou, 2020). Random forests are a learning algorithm proposed by Breiman [Mach. Learn. 45 (2001) 5–32] that combines several randomized decision trees and aggregates their predictions by averaging (Breiman, 2001; Scornet, Biau, & Vert, 2015), as seen in **Fig. 3** (Kim & Kim, n.d.).
+
+**Figure 3. Diagram of a random forest composed of multiple decision trees.**  
+`![Figure 3. Diagram of a random forest composed of multiple decision trees](images/random-forest-diagram.png)`
+
+Each individual tree is individually a weak learner. However, an RF of trees is a strong learner.  
+The development of the RF model was performed using Python 3.10 programming language. The implementation of the RF model was performed using the scikit-learn library, which is an open-source machine learning tool. The RF classifier included in the ensemble module of the scikit-learn library was used for all experimental processes.
+
+### 2.4.2. Preprocessing and feature set
+All candidate predictors were assembled into a matrix $X \in \mathbb{R}^{n \times p}$; the response $y \in \mathbb{R}^{n}$ was continuous. Because tree ensembles are scale-invariant, no standardization was required. Any imputation (if needed) would be performed within training folds only to prevent leakage. We did not apply external feature selection; all curated indicators were supplied to the model. (RFs and their scikit-learn implementation are described in the source paper’s methods. )
+
+### 2.4.3. Hyperparameter optimization
+Careful hyperparameter optimization is especially important for small datasets, where model variance is high and default settings can underperform (Dou et al., 2023). In particular for Random Forests (RFs), there is significant benefit to be gained by model tuning … away from their default parameter settings (Huang & Boutros, 2016). Accordingly, we tuned RF capacity and regularization with exhaustive grid search using scikit-learn’s GridSearchCV, which evaluates each candidate configuration under cross-validation and selects the one that maximizes predictive performance; we used $R^2$ as the selection metric. After selection, `refit=True` retrains the chosen configuration on the data passed to `.fit()`, yielding a final, fully fitted model for downstream use (Lu et al., 2021).
+
+### 2.4.4. Pipeline and hyperparameter search
+The learning algorithm was wrapped in a scikit-learn Pipeline with a single modeling step (`RandomForestRegressor(random_state=42, n_jobs=-1)`). To tune capacity and regularization, we searched over:  
+• number of trees $\{200, 400, 800\}$  
+• maximum depth $\{\text{None}, 10, 20, 40\}$  
+• minimum samples to split $\{2, 5, 10\}$  
+• minimum samples per leaf $\{1, 2, 4\}$  
+• feature sub-sampling at each split $\{\sqrt{p}, \log_2 p, 0.5p\}$
+
+### 2.4.5. Stratified nested cross-validation
+To obtain an unbiased generalization estimate while tuning, we used nested 5×5 cross-validation with regression-friendly stratification:  
+• **Outer CV (assessment).** Five folds provide out-of-fold predictions used only for evaluation.  
+• **Inner CV (selection).** On each outer-training split, a 5-fold GridSearchCV chooses hyperparameters by maximizing $R^2$.
+
+Because $y$ is continuous, we binned $y$ into quantile labels within each `split()` call and then applied `StratifiedKFold`. This maintains similar target distributions across folds even with small $n$, and bins are recomputed inside each subset to avoid index or feasibility errors and to respect the nested design.
+
+#### Nested Stratified Cross validation:
+Nested cross-validation is a robust method for hyperparameter tuning and model evaluation, especially on small datasets. In nested cross-validation, the data is split into outer folds for unbiased performance estimation and inner folds for tuning hyperparameters, which helps prevent overfitting and provides a more realistic assessment of model performance. This approach is particularly important for small datasets, where the risk of overfitting is higher and unbiased evaluation is critical for reliable results.” (Vabalas, Gowen, Poliakoff, & Casson, 2019) (Ghasemzadeh, Hillman, & Mehta, 2023)
+
+Cross-validation is a resampling-based technique for the estimation of a model’s predictive performance (James et al., 2013). The basic idea behind CV is to split an existing data set into training and test sets using a user defined number of partitions (Figure 2). First, the data set is divided into k partitions or folds. The training set consists of k − 1 partitions and the test set of the remaining partition. The model is trained on the training set and evaluated on the test partition. A repetition consists of k iterations for which every time a model is trained on the training set and evaluated on the test set. Each partition serves as a test set once.” (Schratz, Muenchow, & Eugenia, 2018)
+
+### 2.4.6. Stratified split
+Stratified split is a data-partitioning technique that ensures each subset (e.g., training and testing) retains the same distribution of key subgroups or classes as the full dataset. This alignment helps models learn from—and generalize to—minority classes more effectively, reducing bias and improving overall performance. Empirically, stratified strategies have been shown to enhance model accuracy and reliability in practice (Tuyen, Dang, Minh, & Nguyen, 2025), improve results under class imbalance (Jude & Uddin, 2024), and yield training sets that better represent the population than simple random sampling, which can translate into higher predictive accuracy in ensembles (Miao et al., 2025).
+
+## 2.5. Model performance evaluation
+
+### 2.5.1. Metrics and reporting
+When evaluating a random forest regressor, reporting R² (coefficient of determination), RMSE (root mean squared error), and MAE (mean absolute error) provides a comprehensive view of model performance.  
+Outer-fold predictions were summarized as mean ± SD for:  
+• $R^2$ (primary)  
+• RMSE  
+• MAE  
+Only outer test folds enter these summaries, so selection bias from tuning is controlled by design. After evaluation, we refitted the best-found configuration on all available data to obtain the final model used for interpretation and downstream use. (In the source article, model construction, grid search, and evaluation procedures are laid out for RFs; we adopt the same principles with a stricter, nested protocol.)
+
+### 2.5.2. Reproducibility
+All modeling used scikit-learn (RF and GridSearchCV) and the shap Python package; random seeds were fixed for the outer and inner splitters and the RF estimator. Following evaluation, the refitted best estimator (trained on the full dataset) was the object of interpretation and is the artifact intended for application. (The paper describes RFs, scikit-learn usage, grid search, and SHAP tooling; our changes are the nested CV protocol and regression metrics.)
+
+## 2.6. Model interpretation
+
+### 2.6.1. Gini Importance in Random Forests: Meaning and Interpretation
+Gini importance, also known as mean decrease in impurity (MDI), is a measure used in random forests to quantify how much each feature contributes to improving the purity of the nodes (splits) in the decision trees (Nembrini, König, & Wright, 2018; Aldrich, 2020).  
+Gini importance for a feature is calculated as the total reduction of the Gini impurity criterion brought by that feature, averaged over all trees in the forest. It reflects how much a feature helps to split the data into homogeneous groups. A higher Gini importance means the feature is more influential in partitioning the data and thus is considered more important for the model’s predictions. For each split in a tree, the decrease in Gini impurity is attributed to the feature used for that split. These decreases are summed for each feature across all trees and then normalized (Nembrini et al., 2018; Aldrich, 2020).
+
+### 2.6.2. Model interpretation with the SHAP method
+We explain the fitted RF’s regression outputs using SHapley Additive exPlanations (SHAP) proposed by Lundberg and Lee (2017b) for RF model interpretation. SHAP supports the interpretation of machine learning models through Shapley values.  
+When a model is formed with an RF, each node in each DT provides a condition for splitting the dataset. There are two criteria used to measure the quality of a classification. The criteria commonly used to select the optimal condition in the classification process include the Gini index and entropy-based information gain. With these indicators, it is possible to obtain information on how each feature contributes to an average decrease in error in the model classification process. As such, the average of the data collected from all trees in the forest is a measure of feature importance. However, the feature importance ranking obtained based on the error decrease in data division is insufficient for explaining directionality of influence.  
+SHAP uses the concept of game theory developed by Shapley (1953) to calculate the importance of individual independent variables (Seyrfar, Ataei, Movahedi, & Derrible, 2021). Shapley values are a measure of the contribution of each predictor (feature) in a machine learning model. SHAP casts explanation as an additive feature-attribution problem grounded in cooperative game theory: for a given prediction, the model output is decomposed as a baseline plus signed feature contributions $\{\phi_i\}$ that sum exactly to the prediction (local accuracy). Formally, SHAP identifies the unique solution in the class of additive attributions that satisfies local accuracy, missingness, and consistency; the Shapley values are computed as weighted averages of marginal contributions over all coalitions of features (Lundberg & Lee, 2017a, 2017b).  
+To examine the effect of a specific feature $i$ on the model, two models are trained: when $i$ is included and when it is not. For a specific input, the difference in output derived through these two models indicates the effect of feature $i$ on the model. Based on this theoretical concept, the Shapley value representing the contribution of each feature is finally calculated as the weighted average of all possible differences (Mokhtari et al., 2019).  
+With the contributions derived in this way as a measure, the SHAP method can explain the output of a machine learning model through global analyses. Global interpretability reflects whether each feature contributes positively or negatively to the output variable. In Python, a practical package can be used to calculate SHAP values by combining various techniques, including the LightGBM, GBoost, CatBoost, XGBoost, and scikit-learn tree models (Lundberg & Lee, 2017a). In this study, we implemented SHAP using the Python shap package for RF model interpretation. “SHAP has high potential for rationalizing predictions of complex ML models” (Rodríguez-Pérez & Bajorath, 2020). SHAP is supported by both theoretical foundations and empirical studies across diverse domains and “guarantees three important properties to be satisfied: local accuracy, missingness and consistency” (Wojtuch, Jankowski, & Podlewska, 2021).
+
+# 3. Results
+
+## 3.1. Model evaluation
+
+### 3.1.1. Feature correlation:
+We analysed pairwise linear dependence among predictors using Pearson’s correlation. The heatmaps graphing the Pearson correlation between the features for the seasonal and hydrological model are shown in **Figure 4**. Most observed correlations were consistent with climatological expectations (e.g., the daily temperature range in spring correlating with that in winter). Apparent links without a plausible mechanism such as a correlation between mean temperature and the percentage of natural precipitation treatment indicator (PNP) are likely due to sampling variability rather than substantive dependence. As expected, some associations are by construction, for example between SDII and cumulative precipitation (SDII is derived from precipitation on wet days).
+
+**Figure 4. Pearson correlation heatmaps for the seasonal and hydrological feature sets.**  
+`![Figure 4. Pearson correlation heatmaps](images/correlation-heatmaps.png)`
+
+### 3.1.2. Model Evaluation metrics
+Here are the cross-validated results for both models (mean ± SD across held-out folds):  
+Model | CV R² (mean ± SD) | CV RMSE (mean ± SD) | CV MAE (mean ± SD)
+---|---|---|---
+Seasonal | 0.413 ± 0.172 | 41.435 ± 8.213 | 32.735 ± 6.488
+Hydrological | 0.408 ± 0.135 | 41.621 ± 10.266 | 32.394 ± 7.404
+
+In five-fold cross-validation, both specifications achieved comparable out-of-sample performance. These results indicate that both models captures a substantial portion of variance while leaving non-trivial unexplained variability The seasonal model yielded a slightly higher mean $R^2$ and marginally lower RMSE, whereas the hydrological model showed a modestly lower MAE, suggesting somewhat smaller typical errors but similar variance explained overall.
+
+## 3.2. Model interpretation
+
+### 3.2.1. Global feature interpretation: Analysis of the importance and contributions of model features
+
+#### 3.2.1.1. Feature importance (Gini vs. SHAP) — Seasonal model
+Figure **5** summarizes feature importance from the final seasonal RF model using two complementary metrics. The top panel reports Gini/MDI importance (mean decrease in impurity),  The bottom panel reports SHAP mean \|value\|, which aggregates the average absolute contribution of each feature to the prediction across observations.  
+Concordance. Both views agree that daily temperature range (DTR) is the dominant driver: DTR\|Spring and DTR\|Winter rank first and second in both panels. average_temperature\|Spring and VPD\|Spring also appear among the top contributors, indicating that spring conditions carry the strongest signal for the outcome.  
+Differences and interpretation. Some discrepancies are expected because the two metrics answer different questions. Gini (top) ranks SDII\|Autumn relatively high and places average_temperature\|Winter above several hydrologic indices, suggesting these variables are often chosen as split rules. SHAP (bottom) assigns cumulative_precipitation\|Autumn and percent of natural precipitation moderate impact, while SDII terms and winter precipitation fall lower once redundancy with related precipitation variables is accounted for. This pattern is consistent with MDI’s known sensitivity to variables offering many split points and to collinearity, whereas SHAP reflects net predictive contribution after conditioning on the rest of the feature set.  
+Seasonal signal. Across both measures, spring variables (DTR, mean temperature, VPD) consistently outrank their autumn/winter counterparts, while winter cumulative precipitation contributes least. These results guided subsequent interpretation with SHAP dependence plots (not shown), focusing on DTR and spring thermal–moisture conditions.
+
+**Figure 5. Feature importance — Seasonal model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
+`![Figure 5. Feature importance — Seasonal model](images/feature-importance-seasonal.png)`
+
+#### 3.2.1.2. Feature importance (Gini vs. SHAP) — Hydrological model
+**Figure 6**. Both views identify daily temperature range (DTR) as the dominant predictor, followed by vapor-pressure deficit (VPD). Average temperature is also influential, indicating that thermodynamic conditions explain more variation than bulk hydrologic totals.  
+Concordance and differences.  
+• Gini ranks DTR ≫ VPD > average_temperature, with the remaining hydrologic indices contributing modestly.  
+• SHAP confirms DTR as the strongest driver and places VPD second, but elevates PNP and previous_year_SDII above several rainfall totals/counts, implying that antecedent dryness and intensity carry predictive signal beyond cumulative precipitation.  
+Overall, the hydrological model points to a clear hierarchy—DTR and VPD capture the greatest influence.  
+Discrepancies between the graphs are expected: Gini/MDI reflects how often a variable serves as a split rule and is sensitive to the number of candidate thresholds and collinearity, whereas SHAP measures the net marginal contribution of each feature to predictions after accounting for all others.
+
+**Figure 6. Feature importance — Hydrological model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
+`![Figure 6. Feature importance — Hydrological model](images/feature-importance-hydrological.png)`
+
+### 3.2.2. Shap summary scatterplot:
+A SHAP summary plot visualizes both the importance and the direction of each feature’s effect on a model’s predictions. Features are ranked top-to-bottom by their overall impact (most important at the top). Each point is one data instance: its x-position shows whether the feature increases (right) or decreases (left) the prediction, and its color encodes the feature’s value (typically red = high, blue = low), revealing how value relates to effect direction. The spread of points along the x-axis within a feature indicates how much that feature’s impact varies across the dataset (wider spread = more heterogeneity).
+
+### 3.2.3. Legacy effect:
+[Text as provided.]
+
 
 ## Relation of annual above ground biomass measurements with varying Drought condition :
 ![image](https://github.com/user-attachments/assets/2a946101-e390-46bc-8fa8-632d5448b3a2)
@@ -39,125 +188,18 @@ The biomass samples were harvested yearly in April then dried and weighed in the
 As can be seen in the above plot the relation between the level of drought and the biomass cannot be described in a linear formula. 
 (add the total reduction of biomass to see that there exists a cause effect relationship)
 This study aims to uncover the nature of influence and the effects of climate factors (temperature, rainfall patterns) on the biomass results.
-## Meteorological data and Climatic indices:
-2021-2024: field measurements from Matta (from Zentra Cloud database). This dataset contains hourly VPD (vapor pressure deficit)(Kpa), temp(C°), precipitation(mm), this was reformatted into a dataset containing daily minimum maximum and average values of temperature and daily total precipitation and maximum precipitation rate
-2003-2014 : field measurements from Matta. This dataset contains daily precipitation (mm) and daily average minimum and maximum temperature (C°) and daily relative humidity (RH) (%) measurements. The RH measurements were recorded only from 2011.
-2014-2021: due to some gaps in the Matta meteorological database, these climate indices were extracted from Rosh Tzurim and Tzur Hadassa meteorological stations located near the Matta plots.
-Using linear regression we received the following correlation between average temperatures in Matta and average temperatures in Rosh Tzurim:
 
 ![image](https://github.com/user-attachments/assets/389aa484-e8ee-4a8b-9b69-cd101687bd27)
 
-We supplemented the missing temperature values from 2014-2020 in the matta data from Rosh Tzurim hourly average temperature values, these were adjusted according to the transformation extracted from the linear regression. The average temps and daily min max temps were extracted from hourly temperature values of each day.
-Using linear regression we received the following correlation between daily precipitation in Matta and daily precipitation in Tzur Hadassa:
 
  ![image](https://github.com/user-attachments/assets/012c1d4c-145c-449a-934a-02139f2c128f)
 
-We supplemented the missing precipitation values from 2014-2020 in the matta data from the Tzur Hadassah daily precipitation values, these needed to be adjusted according to the transformation extracted from the linear regression, this we applied after yearly aggregation.
-Using linear regression we received the following correlation between relative humidity in matta and relative humidity in Rosh Tzurim:
 
   ![image](https://github.com/user-attachments/assets/fac4ff47-4510-4b3d-a189-a0a57840a02b)
 
-We supplemented the missing RH values in the Matta data, from 2004-2011 and from 2015-2020 with the relative humidity in Rosh Tzurim after transformation according to the equation extracted from the linear regression.
-### VPD Climate Indice:
-Air can only hold a certain amount of water vapor at a given temperature before it starts condensing back to liquid water (in forms such as dew or rain). The maximum amount of water vapor that air can hold at a certain temperature is called “saturation vapor pressure” or SVP. First we calculate svp as follows:
-![image](https://github.com/user-attachments/assets/0672da68-4c8f-4f9a-bf9f-643fede65ec1)
-
-Similarly, the current actual amount of water vapor in the air is called the “actual vapor pressure” or AVP.
-AVP / SVP x 100 = RH%
-RH is the proportion of water the air is currently holding vs. its maximum capacity. This is defined as “Relative” humidity.
-thus we can calculate AVP from the relative humidity as follows:
-AVP= (RH x SVP)X1/100
-the vapor pressure deficit is the difference between the actual vapor pressure and the maximum vapor pressure in the air at the current temp. In general hot air has a higher capacity for vapor retention, its SVP is larger than cold air.
-VPD = SVP – AVP
-The climate indices were extracted in two different time frames:
-•	Hydrological Climate indices: the climate indices calculated only from the hydrological year. The period of time commonly used for which precipitation totals are measured this is the period of time with the highest correlation between precipitation and negligible changes in storage (soil water). We defined a hydrological year from October to April
-•	Seasonal climate indices extracted separately according to each season which we defined as follows- Autumn : October-November, Winter: December-February, Spring: March-April
-### Combining and Adjusting the data
-We combined the Biomass and Climate Data so that every Biomass sample was joined with the climate indices of the hydrologic year preceding its harvest. In a separate dataframe we combined each Biomass sample with the seasonal climate indices of the year preceding its harvest.
-After combining the Biomass sample data with the indices of the appropriate time frame we adjusted the cumulative precipitation values and the total rainy days according to each treatment.
-3 more indices were calculated:
-Drought indice which we defined as the percent of natural precipitation that the sample received.
-SDII which is the The Simple Daily Intensity Index (SDII), the average rainfall rate on “wet days” (PPT ≥ 1mm), measured in mm/day, during the period of interest (year, season or month).
-### Climate Indices:
-For each given time period the following climate indices were extracted:
-•	Cummulative precipitation- total sum of all daily precipitation values
-•	Simple Daily Intensity Index (SDII):  the average rainfall rate on “wet days” (PPT ≥ 1mm), measured in mm/day, during the period of interest (year, season or month).
-•	Average temperature
-•	no. of consecutive dry days, defined as days with <1mm precipitation
-•	no. of consecutive wet days, defined as days with>1mm precipitation
-•	no. of rain events if an rain event was separated by one day from another rain event this was calculated as one rain event in total.
-•	Average difference between daily Tmin and Tmax (Daily Temperature Range, DTR)
-•	Average VPD (calculated as listed above)
-•	Cumulative precipitation of previous year.
-•	Drought indice  defined as the percent of natural precipitation that the sample received.
-
-## Training the Random Forest Regressor
-We trained two different models and compared them:
-•	one model trained on the seasonal climate indices.
-•	one models trained on the hydrological yearly climate indices
-We used one hot encoding for non numerical values the frequency values this translated categorical data into indicative binary data in this case translated a frequency column into two binary columns frequency NF detailing 1 if the type of frequency was a natural frequency and 0 if not and Frequency HF detailing 1 if the treatment applied was HF and 0 otherwise (the third column LF doesn’t add information and can be extrapolated from the other two columns)
-We split the data into test and train data such that the test size was 20% of the total data, then trained and evaluated a random forest regressor on the 4 different data categories during which we ran the model training on several different indice combinations to determine if certain indices negatively effect the models reliability.
-## Results
-Model trained on Hydrological Indices with only natural frequency treatments:
-
-![image](https://github.com/user-attachments/assets/a8360cbb-bbfd-4b70-8cfd-dafcf921e381)
- 
-the r-squared was generally maximized when all indices were included
-Model trained on Seasonal Indices with only natural frequency treatments:
-
-![image](https://github.com/user-attachments/assets/3bcc9af7-010d-41fe-9e3a-a4aa14a836ad)
- 
-Descriptive statistical Biomass values for all, training, and validation datasets:
-The coefficient of variation of all, training and validation were all close to each other
-
-![image](https://github.com/user-attachments/assets/ce4c61db-2f32-4ea3-a17d-e8b0acc62250)
-
-### Reliability of the models:
-All models consistently returned a non negative r-squared value , because of the level of randomness in the model creation this value varies across multiple runtimes but was generally larger then 0.5 in most models. this indicates the models capabilities of explaining over 50% in the variance in biomass. All models were significantly better at predicting the biomass results then using the mean.
-The points discussed in conclusions were consistent in all runtimes.
-### Feature Importance:
-The feature importance was analysed using SHAP and Gini importance,
-Gini Importance: The importance of a feature is computed as the (normalized) total reduction of the criterion brought by that feature. The criterion is the Gini impurity, which measures the impurity of a node in a decision tree, with more substantial weight to the most important features. Therefore, Gini importance is also known as the total decrease in node impurity.
-SHAP values are a common way of getting a consistent and objective explanation of how each feature impacts the model's prediction.
-SHAP values are based on game theory and assign an importance value to each feature in a model. Features with positive SHAP values positively impact the prediction, while those with negative values have a negative impact. The magnitude is a measure of how strong the effect is.
-the importance calculated by Gini importance and by SHAP were highly similar. with differences in features of similar importance. the similarity between the two importance calculations can be seen below:
 
 ![image](https://github.com/user-attachments/assets/09436bc8-97c0-40fa-9e53-de6153ec82d8)
 
 ![image](https://github.com/user-attachments/assets/b64af77f-1de1-41dd-87f8-9cc3b31b54ba)
 
- 
-### Feature correlation:
-Using Pearsons correlation we analysed the dependence between the different features in the model the results were not indicative of any interaction not easily explained by natural weather behaviour, such as the DTR of spring being correlated to the DTR of winter, or correlations that were improbable such as one between the average temp and the drought treatment applied ,such a correlation is by chance as there is no possible interaction between the two indices. There were also correlations between indices for example SDII and cumulative precipitation which is used in order to calculate the SDII. The following images are the heatmaps graphing the Pearson correlation between the features.
-
-![image](https://github.com/user-attachments/assets/9975180d-4fbf-44e4-8d51-1a42a9ebf581)
-
- 
-### SHAP Summary ScatterPlot
-Scatter plot explanation: Y-axis indicates the feature names in order of importance from top to bottom. X-axis represents the SHAP value, which indicates the degree of change in log odds. Each point represents a row of data from the original dataset. The colour of each point on the graph represents the value of the corresponding feature, with red indicating high values and blue indicating low values.
-For instance, In both of the seasonal scatter plots below we can see in the winter average temperature the blue points, low feature in this case low temperature points correspond to high SHAP values meaning they have a positive effect on biomass and the red points correspond with high temperature values have a negative effect on biomass. Furthermore we can see an opposite directional correlation in the DTR high DTR has a positive effect on biomass and low DTR has a negative effect on biomass.
-
-![image](https://github.com/user-attachments/assets/6ce7ae02-5387-4894-836a-ffd4f1c1d0e0)
-
-
-![image](https://github.com/user-attachments/assets/6dec7d59-ec2f-4354-8128-80cba0bbccc3)
-
-
- 
-## Discussion:
-### Drought percentage:
-During the hydrological periods the drought level had the relatively high feature importance over other models, the correlation is identical in all the models a positive correlation between the percent of natural precipitation and the biomass. This is indicative of the definition of a hydrological year or water year which takes into account months with the highest correlation between precipitation and negligible changes in storage (soil water). The correlation was positive between percent of natural precipitation and Biomass in this model and all other models.
-Daily Temperature Range and Average Temperature:
-In both hydrological models the daily temperature range was most important consistently and the correlation is a positive correlation, increase in the daily temperature range correlates with increase in the biomass.
-In general across all models the Daily Temperature Range had very high or highest significance. From a seasonal perspective the Spring and Winter daily temperature range had highest significance consistently.
-Across all models the relationship between the DTR and the biomass was a positive one, increase in the DTR results in increase in the biomass, this gives an indication that during spring and winter months high temperatures followed by low temperatures have a positive effect on biomass whereas an increase in the average winter temperatures was shown to have a negative effect on biomass as can be seen in both the nf and the af seasonal scatterplots. furthermore, we can see that the winter and spring average temp were most significant off all seasonal average temperatures.
-### Spring and Winter DTR
-in the Seasonal models the Spring DTR and Winter DTR were of high importance consistentl.
-Previous Year Precipitation:
-In both the hydrological models the previous years precipitation was consistently more important than the current yearly precipitation. This could be because of soil water retention properties which help to minimize the effects of temporary droughts.
-### Vapor Pressure deficit:
- In the seasonal models Springs VPD was the most important and in the hydrological model the VPD was similarly important. In the hydrological model the VPD was generally of greater importance then precipitation indices, this could be an indication that the atmospheric water budget has a greater effect than precipitation on the plants hydration.
-
-## Conclusions
-To summarize the various models trained on the data showed reliability (R squared generally above 0.5)  and detailed a non linear relation between key climatic features such as Daily temperature range Vapor Pressure Deficit and previous year precipitation. Our results highlight that Biomass in Mediterranean climates is related to these climate variables; and the variance explained by the models greatly increased when including these indices. The relationship between the Biomass and the Climate is a complex one but ML models like this one can be used in order to better determine key factors in this complex relationship. Our model showed the Mediterranean landscape had a relatively strong resilience to drought factors and the feature importance of the drought was not most important in determining biomass. There are many possible biological explanations for this as was detailed such as the evapotranspiration from the plant having a stronger effect than precipitation and the water retention properties of the soil.
 
