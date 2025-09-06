@@ -182,14 +182,19 @@ Overall, the hydrological model points to a clear hierarchy—DTR and VPD captur
 Discrepancies between the graphs are expected: Gini/MDI reflects how often a variable serves as a split rule and is sensitive to the number of candidate thresholds and collinearity, whereas SHAP measures the net marginal contribution of each feature to predictions after accounting for all others.
 
 **Figure 8. Feature importance — Hydrological model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
-![Figure 6. Feature importance — Hydrological model](images/feature_importance_hydrological.jpeg)
+![Figure 8. Feature importance — Hydrological model](images/feature_importance_hydrological.jpeg)
 
 ### 3.2.2. Shap summary scatterplot:
 A SHAP summary plot visualizes both the importance and the direction of each feature’s effect on a model’s predictions. Features are ranked top-to-bottom by their overall impact (most important at the top). Each point is one data instance: its x-position shows whether the feature increases (right) or decreases (left) the prediction, and its color encodes the feature’s value (typically red = high, blue = low), revealing how value relates to effect direction. The spread of points along the x-axis within a feature indicates how much that feature’s impact varies across the dataset (wider spread = more heterogeneity).
+**Figure 9. Shap summary scatterplot for Hydrological model.**  
+![Figure 9. Shap summary scatterplot for Hydrological model](images/shap_summary_plot_Hydrological.jpeg)
+
+**Figure 10. Shap summary scatterplot for Seasonal model.**  
+![Figure 10. Shap summary scatterplot for Seasonal model](images/shap_summary_plot_Seasonal.jpeg)
 
 ### 3.2.3. Legacy effect:
-**Figure 9. Log Legacy Effect Linear Regression Graphs** Top  Log transformed linear regression between current year precipitation and Biomass. Bottom Log transformed linear regression between previous year precipitation and Biomass.  
-![Figure 9. Log Legacy Effect Linear Regression Graphs](images/log_Legacy_effect_comparision.jpeg)
+**Figure 11. Log Legacy Effect Linear Regression Graphs** Top  Log transformed linear regression between current year precipitation and Biomass. Bottom Log transformed linear regression between previous year precipitation and Biomass.  
+![Figure 11. Log Legacy Effect Linear Regression Graphs](images/log_Legacy_effect_comparision.jpeg)
 
 # Appendix
 
