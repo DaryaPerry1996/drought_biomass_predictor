@@ -204,8 +204,6 @@ This study aims to uncover the nature of influence and the effects of climate fa
   ![image](https://github.com/user-attachments/assets/fac4ff47-4510-4b3d-a189-a0a57840a02b)
 
 
-![image](https://github.com/user-attachments/assets/09436bc8-97c0-40fa-9e53-de6153ec82d8)
 
-![image](https://github.com/user-attachments/assets/b64af77f-1de1-41dd-87f8-9cc3b31b54ba)
 
 
