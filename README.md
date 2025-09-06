@@ -30,7 +30,7 @@ In this study, a RF regression model was developed to estimate the above ground 
 The study procedure is shown in **Fig. 1**. First, the climate data was preprocessed to compute indices related to seasonal and interannual climate variability. Next, an RF algorithm was introduced for model building, and a grid search method was introduced to derive accurate model parameters. Data was partitioned using nested cross-validation, with 5 folds in the outer loop for model evaluation and 5 folds in the inner loop for hyperparameter optimization. Stratified splitting was performed  to maintain balanced distributions across folds.  The final step consisted of model evaluation. Performance evaluation was performed based on the coefficient of determination (R²), root mean squared error (RMSE), mean squared error (MSE), and mean absolute error (MAE), which were utilized to quantify the evaluation results. Finally, in the interpretation process, the concepts of SHAP and Gini importance were introduced to assess the relative contributions of the climate indices to biomass prediction.
 
 **Figure 1. Research flowchart.**  
-`![Figure 1. Research flowchart](images/model_workflow.jpg)`
+![Figure 1. Research flowchart](images/model_workflow.jpg)
 
 ## 2.2. Study area
 
