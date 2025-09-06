@@ -71,7 +71,7 @@ Random forests are ensemble learning algorithms that construct multiple decision
 A tree-based model involves recursively partitioning the given dataset into two groups based on a certain criterion until a predetermined stopping condition is met. At the bottom of decision trees are so-called leaf nodes or leaves (Schonlau & Zou, 2020). Random forests are a learning algorithm proposed by Breiman [Mach. Learn. 45 (2001) 5–32] that combines several randomized decision trees and aggregates their predictions by averaging (Breiman, 2001; Scornet, Biau, & Vert, 2015), as seen in **Fig. 3** (Kim & Kim, n.d.).
 
 **Figure 3. Diagram of a random forest composed of multiple decision trees.**  
-`![Figure 3. Diagram of a random forest composed of multiple decision trees](images/random-forest-diagram.jpg)`
+![Figure 3. Diagram of a random forest composed of multiple decision trees](images/random-forest-diagram.jpg)
 
 Each individual tree is individually a weak learner. However, an RF of trees is a strong learner.  
 The development of the RF model was performed using Python 3.10 programming language. The implementation of the RF model was performed using the scikit-learn library, which is an open-source machine learning tool. The RF classifier included in the ensemble module of the scikit-learn library was used for all experimental processes.
@@ -102,7 +102,7 @@ Nested cross-validation is a robust method for hyperparameter tuning and model e
 
 Cross-validation is a resampling-based technique for the estimation of a model’s predictive performance (James et al., 2013). The basic idea behind CV is to split an existing data set into training and test sets using a user defined number of partitions (Figure 2). First, the data set is divided into k partitions or folds. The training set consists of k − 1 partitions and the test set of the remaining partition. The model is trained on the training set and evaluated on the test partition. A repetition consists of k iterations for which every time a model is trained on the training set and evaluated on the test set. Each partition serves as a test set once. (Schratz, Muenchow, & Eugenia, 2018)
 **Figure 4. Diagram of a random forest composed of multiple decision trees.** 
-`![Figure 4. Diagram nested cross validation process](images/nested_cv.jpg)`
+![Figure 4. Diagram nested cross validation process](images/nested_cv.jpg)
 
 
 ### 2.4.6. Stratified split
@@ -142,9 +142,9 @@ With the contributions derived in this way as a measure, the SHAP method can exp
 We analysed pairwise linear dependence among predictors using Pearson’s correlation. The heatmaps graphing the Pearson correlation between the features for the seasonal and hydrological model are shown in **Figure 5** , **Figure 6**. Most observed correlations were consistent with climatological expectations (e.g., the daily temperature range in spring correlating with that in winter). Apparent links without a plausible mechanism such as a correlation between mean temperature and the percentage of natural precipitation treatment indicator (PNP) are likely due to sampling variability rather than substantive dependence. As expected, some associations are by construction, for example between SDII and cumulative precipitation (SDII is derived from precipitation on wet days).
 
 **Figure 5. Pearson correlation heatmaps for the hydrological feature sets.**  
-`![Figure 5. Pearson correlation heatmaps](images/correlation_matrix_hydrological.jpeg)`
+![Figure 5. Pearson correlation heatmaps](images/correlation_matrix_hydrological.jpeg)
 **Figure 6. Pearson correlation heatmaps for the seasonal feature sets.**  
-`![Figure 6. Pearson correlation heatmaps](images/correlation_matrix_seasonal.jpeg)`
+![Figure 6. Pearson correlation heatmaps](images/correlation_matrix_seasonal.jpeg)
 
 ### 3.1.2. Model Evaluation metrics
 Here are the cross-validated results for both models (mean ± SD across held-out folds):  
@@ -166,7 +166,7 @@ Differences and interpretation. Some discrepancies are expected because the two 
 Seasonal signal. Across both measures, spring variables (DTR, mean temperature, VPD) consistently outrank their autumn/winter counterparts, while winter cumulative precipitation contributes least.
 
 **Figure 7. Feature importance — Seasonal model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
-`![Figure 7. Feature importance — Seasonal model](images/feature_importance_seasonal.jpeg)`
+![Figure 7. Feature importance — Seasonal model](images/feature_importance_seasonal.jpeg)
 
 #### 3.2.1.2. Feature importance (Gini vs. SHAP) — Hydrological model
 **Figure 8**. Both views identify daily temperature range (DTR) as the dominant predictor, followed by vapor-pressure deficit (VPD). Average temperature is also influential, indicating that thermodynamic conditions explain more variation than bulk hydrologic totals.  
@@ -177,14 +177,14 @@ Overall, the hydrological model points to a clear hierarchy—DTR and VPD captur
 Discrepancies between the graphs are expected: Gini/MDI reflects how often a variable serves as a split rule and is sensitive to the number of candidate thresholds and collinearity, whereas SHAP measures the net marginal contribution of each feature to predictions after accounting for all others.
 
 **Figure 8. Feature importance — Hydrological model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
-`![Figure 6. Feature importance — Hydrological model](images/feature_importance_hydrological.jpeg)`
+![Figure 6. Feature importance — Hydrological model](images/feature_importance_hydrological.jpeg)
 
 ### 3.2.2. Shap summary scatterplot:
 A SHAP summary plot visualizes both the importance and the direction of each feature’s effect on a model’s predictions. Features are ranked top-to-bottom by their overall impact (most important at the top). Each point is one data instance: its x-position shows whether the feature increases (right) or decreases (left) the prediction, and its color encodes the feature’s value (typically red = high, blue = low), revealing how value relates to effect direction. The spread of points along the x-axis within a feature indicates how much that feature’s impact varies across the dataset (wider spread = more heterogeneity).
 
 ### 3.2.3. Legacy effect:
 **Figure 9. Log Legacy Effect Linear Regression Graphs** Top Log transformed linear regression between previous year precipitation and Biomass. Bottom Log transformed linear regression between current year precipitation and Biomass.  
-`![Figure 9. Log Legacy Effect Linear Regression Graphs](images/log_Legacy_effect_comparision.jpeg)`
+![Figure 9. Log Legacy Effect Linear Regression Graphs](images/log_Legacy_effect_comparision.jpeg)
 
 
 ## Relation of annual above ground biomass measurements with varying Drought condition :
