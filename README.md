@@ -41,38 +41,20 @@ From 2002 to 2010, biomass was collected in 15 plots (5 per treatment) with 10 w
 ### 2.3.1. Meteorological data and climate indices
 Meteorological data were compiled from multiple sources to ensure coverage across the full study period. For 2021–2024, in-field measurements from the Matta station (Zentra Cloud) provided hourly temperature, precipitation, and humidity (used to compute VPD). Historical Matta records supplied daily precipitation and daily minimum/mean/maximum temperature for 2003–2014, with relative humidity available from 2011 onward. To bridge gaps from 2014–2021, daily observations were obtained from nearby stations (Rosh Tzurim and Tzur Hadassa). Station series were harmonized to the Matta site by linear regressions; transformed values were then aggregated to daily summaries consistent with the in-field record.  
 Climate indices were derived from these daily data. For analysis focused on antecedent water availability, we defined a hydrological year as October–April and computed indices within that window. For seasonal analyses, indices were additionally calculated for Autumn (Oct–Nov), Winter (Dec–Feb), and Spring (Mar–Apr). Variables included cumulative precipitation, temperature summaries, counts of consecutive dry/wet days, number of rain events, daily temperature range (DTR), the Simple Daily Intensity Index (SDII; mean intensity on wet days, ≥1 mm), vapor pressure deficit (VPD) , and previous-year precipitation. A drought index was defined as the percentage of natural precipitation reaching each treatment (e.g., ≈33% for D66).
-vapor pressure deficit:
-Air can only hold a limited amount of water vapor at a given temperature before it condenses back into liquid water (e.g., dew or rain). The maximum amount of water vapor that air can hold at a certain temperature is called the **saturation vapor pressure (SVP)**.
+vapor pressure deficit: At a given temperature, the maximum water vapor air can hold before condensation occurs is termed the **saturation vapor pressure (SVP)**. The actual vapor content is the **actual vapor pressure (AVP)**, and their ratio defines **relative humidity (RH)**:
 
-We calculate SVP as follows:
+![RH equation](https://latex.codecogs.com/svg.latex?RH(\%)=\frac{AVP}{SVP}\times100)
 
-![SVP equation](images/svp_equation.png)
+From this relation, AVP can be derived as:
 
----
+![AVP equation](https://latex.codecogs.com/svg.latex?AVP=\frac{RH\times SVP}{100})
 
-The actual amount of water vapor currently present in the air is called the **actual vapor pressure (AVP)**.
+The **vapor pressure deficit (VPD)**, a key indicator of atmospheric water demand, is then expressed as:
 
-Relative humidity (RH) is defined as the ratio of AVP to SVP:
+![VPD equation](https://latex.codecogs.com/svg.latex?VPD=SVP-AVP)
 
-\[
-RH\% = \frac{AVP}{SVP} \times 100
-\]
+In general, SVP increases with temperature, reflecting the greater capacity of warm air to retain water vapor.
 
-From this, we can calculate AVP as:
-
-\[
-AVP = \frac{RH \times SVP}{100}
-\]
-
----
-
-Finally, the **vapor pressure deficit (VPD)** represents the difference between the maximum and actual vapor pressures in the air at the current temperature:
-
-\[
-VPD = SVP - AVP
-\]
-
-In general, warm air has a higher capacity to hold water vapor (larger SVP) compared to cold air.
 All features generated and used in this work and brief descriptions of their sources are summarized in **Table 1**.
 
 **Table 1. Descriptions of the model variables and data sources**  
