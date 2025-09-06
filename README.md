@@ -30,7 +30,7 @@ In this study, a RF regression model was developed to estimate the above ground 
 The study procedure is shown in **Fig. 1**. First, the climate data was preprocessed to compute indices related to seasonal and interannual climate variability. Next, an RF algorithm was introduced for model building, and a grid search method was introduced to derive accurate model parameters. Data was partitioned using nested cross-validation, with 5 folds in the outer loop for model evaluation and 5 folds in the inner loop for hyperparameter optimization. Stratified splitting was performed  to maintain balanced distributions across folds.  The final step consisted of model evaluation. Performance evaluation was performed based on the coefficient of determination (R²), root mean squared error (RMSE), mean squared error (MSE), and mean absolute error (MAE), which were utilized to quantify the evaluation results. Finally, in the interpretation process, the concepts of SHAP and Gini importance were introduced to assess the relative contributions of the climate indices to biomass prediction.
 
 **Figure 1. Research flowchart.**  
-`![Figure 1. Research flowchart](images/flowchart.png)`
+`![Figure 1. Research flowchart](images/model_workflow.jpg)`
 
 ## 2.2. Study area
 
@@ -71,7 +71,7 @@ Random forests are ensemble learning algorithms that construct multiple decision
 A tree-based model involves recursively partitioning the given dataset into two groups based on a certain criterion until a predetermined stopping condition is met. At the bottom of decision trees are so-called leaf nodes or leaves (Schonlau & Zou, 2020). Random forests are a learning algorithm proposed by Breiman [Mach. Learn. 45 (2001) 5–32] that combines several randomized decision trees and aggregates their predictions by averaging (Breiman, 2001; Scornet, Biau, & Vert, 2015), as seen in **Fig. 3** (Kim & Kim, n.d.).
 
 **Figure 3. Diagram of a random forest composed of multiple decision trees.**  
-`![Figure 3. Diagram of a random forest composed of multiple decision trees](images/random-forest-diagram.png)`
+`![Figure 3. Diagram of a random forest composed of multiple decision trees](images/random-forest-diagram.jpg)`
 
 Each individual tree is individually a weak learner. However, an RF of trees is a strong learner.  
 The development of the RF model was performed using Python 3.10 programming language. The implementation of the RF model was performed using the scikit-learn library, which is an open-source machine learning tool. The RF classifier included in the ensemble module of the scikit-learn library was used for all experimental processes.
@@ -98,9 +98,12 @@ To obtain an unbiased generalization estimate while tuning, we used nested 5×5 
 Because $y$ is continuous, we binned $y$ into quantile labels within each `split()` call and then applied `StratifiedKFold`. This maintains similar target distributions across folds even with small $n$, and bins are recomputed inside each subset to avoid index or feasibility errors and to respect the nested design.
 
 #### Nested Stratified Cross validation:
-Nested cross-validation is a robust method for hyperparameter tuning and model evaluation, especially on small datasets. In nested cross-validation, the data is split into outer folds for unbiased performance estimation and inner folds for tuning hyperparameters, which helps prevent overfitting and provides a more realistic assessment of model performance. This approach is particularly important for small datasets, where the risk of overfitting is higher and unbiased evaluation is critical for reliable results.” (Vabalas, Gowen, Poliakoff, & Casson, 2019) (Ghasemzadeh, Hillman, & Mehta, 2023)
+Nested cross-validation is a robust method for hyperparameter tuning and model evaluation, especially on small datasets. In nested cross-validation, the data is split into outer folds for unbiased performance estimation and inner folds for tuning hyperparameters, which helps prevent overfitting and provides a more realistic assessment of model performance. This approach is particularly important for small datasets, where the risk of overfitting is higher and unbiased evaluation is critical for reliable results.(Vabalas, Gowen, Poliakoff, & Casson, 2019) (Ghasemzadeh, Hillman, & Mehta, 2023)
 
-Cross-validation is a resampling-based technique for the estimation of a model’s predictive performance (James et al., 2013). The basic idea behind CV is to split an existing data set into training and test sets using a user defined number of partitions (Figure 2). First, the data set is divided into k partitions or folds. The training set consists of k − 1 partitions and the test set of the remaining partition. The model is trained on the training set and evaluated on the test partition. A repetition consists of k iterations for which every time a model is trained on the training set and evaluated on the test set. Each partition serves as a test set once.” (Schratz, Muenchow, & Eugenia, 2018)
+Cross-validation is a resampling-based technique for the estimation of a model’s predictive performance (James et al., 2013). The basic idea behind CV is to split an existing data set into training and test sets using a user defined number of partitions (Figure 2). First, the data set is divided into k partitions or folds. The training set consists of k − 1 partitions and the test set of the remaining partition. The model is trained on the training set and evaluated on the test partition. A repetition consists of k iterations for which every time a model is trained on the training set and evaluated on the test set. Each partition serves as a test set once. (Schratz, Muenchow, & Eugenia, 2018)
+**Figure 4. Diagram of a random forest composed of multiple decision trees.** 
+`![Figure 4. Diagram nested cross validation process](images/nested_cv.jpg)`
+
 
 ### 2.4.6. Stratified split
 Stratified split is a data-partitioning technique that ensures each subset (e.g., training and testing) retains the same distribution of key subgroups or classes as the full dataset. This alignment helps models learn from—and generalize to—minority classes more effectively, reducing bias and improving overall performance. Empirically, stratified strategies have been shown to enhance model accuracy and reliability in practice (Tuyen, Dang, Minh, & Nguyen, 2025), improve results under class imbalance (Jude & Uddin, 2024), and yield training sets that better represent the population than simple random sampling, which can translate into higher predictive accuracy in ensembles (Miao et al., 2025).
@@ -136,10 +139,12 @@ With the contributions derived in this way as a measure, the SHAP method can exp
 ## 3.1. Model evaluation
 
 ### 3.1.1. Feature correlation:
-We analysed pairwise linear dependence among predictors using Pearson’s correlation. The heatmaps graphing the Pearson correlation between the features for the seasonal and hydrological model are shown in **Figure 4**. Most observed correlations were consistent with climatological expectations (e.g., the daily temperature range in spring correlating with that in winter). Apparent links without a plausible mechanism such as a correlation between mean temperature and the percentage of natural precipitation treatment indicator (PNP) are likely due to sampling variability rather than substantive dependence. As expected, some associations are by construction, for example between SDII and cumulative precipitation (SDII is derived from precipitation on wet days).
+We analysed pairwise linear dependence among predictors using Pearson’s correlation. The heatmaps graphing the Pearson correlation between the features for the seasonal and hydrological model are shown in **Figure 5** , **Figure 6**. Most observed correlations were consistent with climatological expectations (e.g., the daily temperature range in spring correlating with that in winter). Apparent links without a plausible mechanism such as a correlation between mean temperature and the percentage of natural precipitation treatment indicator (PNP) are likely due to sampling variability rather than substantive dependence. As expected, some associations are by construction, for example between SDII and cumulative precipitation (SDII is derived from precipitation on wet days).
 
-**Figure 4. Pearson correlation heatmaps for the seasonal and hydrological feature sets.**  
-`![Figure 4. Pearson correlation heatmaps](images/correlation-heatmaps.png)`
+**Figure 5. Pearson correlation heatmaps for the hydrological feature sets.**  
+`![Figure 5. Pearson correlation heatmaps](images/correlation_matrix_hydrological.jpeg)`
+**Figure 6. Pearson correlation heatmaps for the seasonal feature sets.**  
+`![Figure 6. Pearson correlation heatmaps](images/correlation_matrix_seasonal.jpeg)`
 
 ### 3.1.2. Model Evaluation metrics
 Here are the cross-validated results for both models (mean ± SD across held-out folds):  
@@ -155,30 +160,31 @@ In five-fold cross-validation, both specifications achieved comparable out-of-sa
 ### 3.2.1. Global feature interpretation: Analysis of the importance and contributions of model features
 
 #### 3.2.1.1. Feature importance (Gini vs. SHAP) — Seasonal model
-Figure **5** summarizes feature importance from the final seasonal RF model using two complementary metrics. The top panel reports Gini/MDI importance (mean decrease in impurity),  The bottom panel reports SHAP mean \|value\|, which aggregates the average absolute contribution of each feature to the prediction across observations.  
+Figure **7** summarizes feature importance from the final seasonal RF model using two complementary metrics. The top panel reports Gini/MDI importance (mean decrease in impurity),  The bottom panel reports SHAP mean value, which aggregates the average absolute contribution of each feature to the prediction across observations.  
 Concordance. Both views agree that daily temperature range (DTR) is the dominant driver: DTR\|Spring and DTR\|Winter rank first and second in both panels. average_temperature\|Spring and VPD\|Spring also appear among the top contributors, indicating that spring conditions carry the strongest signal for the outcome.  
 Differences and interpretation. Some discrepancies are expected because the two metrics answer different questions. Gini (top) ranks SDII\|Autumn relatively high and places average_temperature\|Winter above several hydrologic indices, suggesting these variables are often chosen as split rules. SHAP (bottom) assigns cumulative_precipitation\|Autumn and percent of natural precipitation moderate impact, while SDII terms and winter precipitation fall lower once redundancy with related precipitation variables is accounted for. This pattern is consistent with MDI’s known sensitivity to variables offering many split points and to collinearity, whereas SHAP reflects net predictive contribution after conditioning on the rest of the feature set.  
-Seasonal signal. Across both measures, spring variables (DTR, mean temperature, VPD) consistently outrank their autumn/winter counterparts, while winter cumulative precipitation contributes least. These results guided subsequent interpretation with SHAP dependence plots (not shown), focusing on DTR and spring thermal–moisture conditions.
+Seasonal signal. Across both measures, spring variables (DTR, mean temperature, VPD) consistently outrank their autumn/winter counterparts, while winter cumulative precipitation contributes least.
 
-**Figure 5. Feature importance — Seasonal model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
-`![Figure 5. Feature importance — Seasonal model](images/feature-importance-seasonal.png)`
+**Figure 7. Feature importance — Seasonal model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
+`![Figure 7. Feature importance — Seasonal model](images/feature_importance_seasonal.jpeg)`
 
 #### 3.2.1.2. Feature importance (Gini vs. SHAP) — Hydrological model
-**Figure 6**. Both views identify daily temperature range (DTR) as the dominant predictor, followed by vapor-pressure deficit (VPD). Average temperature is also influential, indicating that thermodynamic conditions explain more variation than bulk hydrologic totals.  
+**Figure 8**. Both views identify daily temperature range (DTR) as the dominant predictor, followed by vapor-pressure deficit (VPD). Average temperature is also influential, indicating that thermodynamic conditions explain more variation than bulk hydrologic totals.  
 Concordance and differences.  
 • Gini ranks DTR ≫ VPD > average_temperature, with the remaining hydrologic indices contributing modestly.  
 • SHAP confirms DTR as the strongest driver and places VPD second, but elevates PNP and previous_year_SDII above several rainfall totals/counts, implying that antecedent dryness and intensity carry predictive signal beyond cumulative precipitation.  
 Overall, the hydrological model points to a clear hierarchy—DTR and VPD capture the greatest influence.  
 Discrepancies between the graphs are expected: Gini/MDI reflects how often a variable serves as a split rule and is sensitive to the number of candidate thresholds and collinearity, whereas SHAP measures the net marginal contribution of each feature to predictions after accounting for all others.
 
-**Figure 6. Feature importance — Hydrological model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
-`![Figure 6. Feature importance — Hydrological model](images/feature-importance-hydrological.png)`
+**Figure 8. Feature importance — Hydrological model.** Top: Gini/MDI importances from RandomForestRegressor. Bottom: mean absolute SHAP values.  
+`![Figure 6. Feature importance — Hydrological model](images/feature_importance_hydrological.jpeg)`
 
 ### 3.2.2. Shap summary scatterplot:
 A SHAP summary plot visualizes both the importance and the direction of each feature’s effect on a model’s predictions. Features are ranked top-to-bottom by their overall impact (most important at the top). Each point is one data instance: its x-position shows whether the feature increases (right) or decreases (left) the prediction, and its color encodes the feature’s value (typically red = high, blue = low), revealing how value relates to effect direction. The spread of points along the x-axis within a feature indicates how much that feature’s impact varies across the dataset (wider spread = more heterogeneity).
 
 ### 3.2.3. Legacy effect:
-[Text as provided.]
+**Figure 9. Log Legacy Effect Linear Regression Graphs** Top Log transformed linear regression between previous year precipitation and Biomass. Bottom Log transformed linear regression between current year precipitation and Biomass.  
+`![Figure 9. Log Legacy Effect Linear Regression Graphs](images/log_Legacy_effect_comparision.jpeg)`
 
 
 ## Relation of annual above ground biomass measurements with varying Drought condition :
