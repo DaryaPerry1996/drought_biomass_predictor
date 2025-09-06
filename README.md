@@ -40,20 +40,8 @@ From 2002 to 2010, biomass was collected in 15 plots (5 per treatment) with 10 w
 
 ### 2.3.1. Meteorological data and climate indices
 Meteorological data were compiled from multiple sources to ensure coverage across the full study period. For 2021–2024, in-field measurements from the Matta station (Zentra Cloud) provided hourly temperature, precipitation, and humidity (used to compute VPD). Historical Matta records supplied daily precipitation and daily minimum/mean/maximum temperature for 2003–2014, with relative humidity available from 2011 onward. To bridge gaps from 2014–2021, daily observations were obtained from nearby stations (Rosh Tzurim and Tzur Hadassa). Station series were harmonized to the Matta site by linear regressions; transformed values were then aggregated to daily summaries consistent with the in-field record.  
-Climate indices were derived from these daily data. For analysis focused on antecedent water availability, we defined a hydrological year as October–April and computed indices within that window. For seasonal analyses, indices were additionally calculated for Autumn (Oct–Nov), Winter (Dec–Feb), and Spring (Mar–Apr). Variables included cumulative precipitation, temperature summaries, counts of consecutive dry/wet days, number of rain events, daily temperature range (DTR), the Simple Daily Intensity Index (SDII; mean intensity on wet days, ≥1 mm), vapor pressure deficit (VPD) , and previous-year precipitation. A drought index was defined as the percentage of natural precipitation reaching each treatment (e.g., ≈33% for D66).
-vapor pressure deficit: At a given temperature, the maximum water vapor air can hold before condensation occurs is termed the **saturation vapor pressure (SVP)**. The actual vapor content is the **actual vapor pressure (AVP)**, and their ratio defines **relative humidity (RH)**:
+Climate indices were derived from these daily data. For analysis focused on antecedent water availability, we defined a hydrological year as October–April and computed indices within that window. For seasonal analyses, indices were additionally calculated for Autumn (Oct–Nov), Winter (Dec–Feb), and Spring (Mar–Apr). Variables included cumulative precipitation, temperature summaries, counts of consecutive dry/wet days, number of rain events, daily temperature range (DTR), the Simple Daily Intensity Index (SDII; mean intensity on wet days, ≥1 mm), vapor pressure deficit (VPD; derived from RH values) , and previous-year precipitation. A drought index was defined as the percentage of natural precipitation reaching each treatment (e.g., ≈33% for D66).
 
-![RH equation](https://latex.codecogs.com/svg.latex?RH(\%)=\frac{AVP}{SVP}\times100)
-
-From this relation, AVP can be derived as:
-
-![AVP equation](https://latex.codecogs.com/svg.latex?AVP=\frac{RH\times SVP}{100})
-
-The **vapor pressure deficit (VPD)**, a key indicator of atmospheric water demand, is then expressed as:
-
-![VPD equation](https://latex.codecogs.com/svg.latex?VPD=SVP-AVP)
-
-In general, SVP increases with temperature, reflecting the greater capacity of warm air to retain water vapor.
 
 All features generated and used in this work and brief descriptions of their sources are summarized in **Table 1**.
 
@@ -82,7 +70,7 @@ We developed a supervised learning workflow to predict a continuous outcome from
 
 ### 2.4.1. Random forest regression
 Although many regression techniques exist (e.g., support vector regression, regularized linear models, and gradient boosting), RF was adopted because it captures non-linear relations and higher-order interactions, handles mixed data types with minimal preprocessing, and remains robust with relatively small samples datasets (Rhodes, Cutler, & Moon, 2023; Han, Williamson, & Fong, 2021).  
-Random forests are ensemble learning algorithms that construct multiple decision trees using bootstrapped samples and random subsets of features, aggregating their predictions to improve accuracy and generalization. This approach allows random forests to model complex, nonlinear relationships between variables, as each tree can capture different aspects of the data's structure and interactions, and the ensemble mitigates overfitting by averaging across diverse models (Schonlau & Zou, 2020). The method is particularly adept at handling nonlinear interactions because the tree-based structure naturally partitions the feature space in a flexible, data-driven manner, enabling the detection of intricate variable relationships without explicit specification. Furthermore, random forests are well-suited for small datasets and high-dimensional settings, as their nonparametric nature does not require distributional assumptions, and the aggregation of multiple trees reduces variance and the risk of overfitting. Empirical studies have demonstrated that random forests maintain high predictive accuracy and robustness in small sample sizes and complex data structures, outperforming many traditional methods in these scenarios (add citation).  
+Random forests are ensemble learning algorithms that construct multiple decision trees using bootstrapped samples and random subsets of features, aggregating their predictions to improve accuracy and generalization. This approach allows random forests to model complex, nonlinear relationships between variables, as each tree can capture different aspects of the data's structure and interactions, and the ensemble mitigates overfitting by averaging across diverse models (Schonlau & Zou, 2020). The method is particularly adept at handling nonlinear interactions because the tree-based structure naturally partitions the feature space in a flexible, data-driven manner, enabling the detection of intricate variable relationships without explicit specification. Furthermore, random forests are well-suited for small datasets and high-dimensional settings, as their nonparametric nature does not require distributional assumptions, and the aggregation of multiple trees reduces variance and the risk of overfitting. Empirical studies have demonstrated that random forests maintain high predictive accuracy and robustness in small sample sizes and complex data structures, outperforming many traditional methods in these scenarios.  
 A tree-based model involves recursively partitioning the given dataset into two groups based on a certain criterion until a predetermined stopping condition is met. At the bottom of decision trees are so-called leaf nodes or leaves (Schonlau & Zou, 2020). Random forests are a learning algorithm proposed by Breiman [Mach. Learn. 45 (2001) 5–32] that combines several randomized decision trees and aggregates their predictions by averaging (Breiman, 2001; Scornet, Biau, & Vert, 2015), as seen in **Fig. 3** (Kim & Kim, n.d.).
 
 **Figure 3. Diagram of a random forest composed of multiple decision trees.**  
@@ -99,11 +87,13 @@ Careful hyperparameter optimization is especially important for small datasets, 
 
 ### 2.4.4. Pipeline and hyperparameter search
 The learning algorithm was wrapped in a scikit-learn Pipeline with a single modeling step (`RandomForestRegressor(random_state=42, n_jobs=-1)`). To tune capacity and regularization, we searched over:  
-• number of trees $\{200, 400, 800\}$  
-• maximum depth $\{\text{None}, 10, 20, 40\}$  
-• minimum samples to split $\{2, 5, 10\}$  
-• minimum samples per leaf $\{1, 2, 4\}$  
-• feature sub-sampling at each split $\{\sqrt{p}, \log_2 p, 0.5p\}$
+| Hyperparameter                  | Values                        |
+|---------------------------------|-------------------------------|
+| Number of trees                 | 200, 400, 800                |
+| Maximum depth                   | None, 10, 20, 40             |
+| Minimum samples to split        | 2, 5, 10                     |
+| Minimum samples per leaf        | 1, 2, 4                      |
+| Feature sub-sampling at split   | √p, log₂p, 0.5p              |
 
 ### 2.4.5. Stratified nested cross-validation
 To obtain an unbiased generalization estimate while tuning, we used nested 5×5 cross-validation with regression-friendly stratification:  
@@ -131,7 +121,7 @@ Outer-fold predictions were summarized as mean ± SD for:
 • $R^2$ (primary)  
 • RMSE  
 • MAE  
-Only outer test folds enter these summaries, so selection bias from tuning is controlled by design. After evaluation, we refitted the best-found configuration on all available data to obtain the final model used for interpretation and downstream use. (In the source article, model construction, grid search, and evaluation procedures are laid out for RFs; we adopt the same principles with a stricter, nested protocol.)
+Only outer test folds enter these summaries, so selection bias from tuning is controlled by design. After evaluation, we refitted the best-found configuration on all available data to obtain the final model used for interpretation. 
 
 ### 2.5.2. Reproducibility
 All modeling used scikit-learn (RF and GridSearchCV) and the shap Python package; random seeds were fixed for the outer and inner splitters and the RF estimator. Following evaluation, the refitted best estimator (trained on the full dataset) was the object of interpretation and is the artifact intended for application. (The paper describes RFs, scikit-learn usage, grid search, and SHAP tooling; our changes are the nested CV protocol and regression metrics.)
