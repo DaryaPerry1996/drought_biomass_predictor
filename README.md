@@ -188,7 +188,7 @@ Discrepancies between the graphs are expected: Gini/MDI reflects how often a var
 A SHAP summary plot visualizes both the importance and the direction of each feature’s effect on a model’s predictions. Features are ranked top-to-bottom by their overall impact (most important at the top). Each point is one data instance: its x-position shows whether the feature increases (right) or decreases (left) the prediction, and its color encodes the feature’s value (typically red = high, blue = low), revealing how value relates to effect direction. The spread of points along the x-axis within a feature indicates how much that feature’s impact varies across the dataset (wider spread = more heterogeneity).
 
 ### 3.2.3. Legacy effect:
-**Figure 9. Log Legacy Effect Linear Regression Graphs** Top Log transformed linear regression between previous year precipitation and Biomass. Bottom Log transformed linear regression between current year precipitation and Biomass.  
+**Figure 9. Log Legacy Effect Linear Regression Graphs** Top  Log transformed linear regression between current year precipitation and Biomass. Bottom Log transformed linear regression between previous year precipitation and Biomass.  
 ![Figure 9. Log Legacy Effect Linear Regression Graphs](images/log_Legacy_effect_comparision.jpeg)
 
 # Appendix
@@ -210,6 +210,38 @@ This study aims to uncover the nature of influence and the effects of climate fa
   ![image](https://github.com/user-attachments/assets/fac4ff47-4510-4b3d-a189-a0a57840a02b)
 
 
+References (APA 7th)
+Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5–32. https://doi.org/10.1023/A:1010933404324
+Han, S., Williamson, B., & Fong, Y. (2021). Improving random forest predictions in small datasets from two-phase sampling designs. BMC Medical Informatics and Decision Making, 21(1), 254. https://doi.org/10.1186/s12911-021-01688-3
+Kim, Y., & Kim, Y. (n.d.). Explainable heat-related mortality with random forest and SHapley Additive exPlanations (SHAP) models. [Figure source cited in text].
+Rhodes, J., Cutler, A., & Moon, K. (2023). Geometry- and accuracy-preserving random forest proximities. IEEE Transactions on Pattern Analysis and Machine Intelligence, 45(10), 10947–10959. https://doi.org/10.1109/TPAMI.2023.3263774
+Schonlau, M., & Zou, R. Y. (2020). The random forest algorithm for statistical learning. The Stata Journal, 20(1), 3–29. https://doi.org/10.1177/1536867X20909688
+Scornet, E., Biau, G., & Vert, J.-P. (2015). Consistency of random forests. The Annals of Statistics, 43(4), 1716–1741. https://doi.org/10.1214/15-AOS1321
+
+Dou, B., Zhu, Z., Merkurjev, E., Ke, L., Chen, L., Jiang, J., Zhu, Y., Liu, J., Zhang, B., & Wei, G.-W. (2023). Machine learning methods for small data challenges in molecular science. Chemical Reviews, 123(13), 8736–8780. https://doi.org/10.1021/acs.chemrev.3c00189
+Huang, B. F. F., & Boutros, P. C. (2016). The parameter sensitivity of random forests. BMC Bioinformatics, 17, 331. https://doi.org/10.1186/s12859-016-1228-x
+Lu, X., et al. (2021). [Full bibliographic details needed for the exact source cited for GridSearchCV usage].
+
+
+Ghasemzadeh, H., Hillman, R., & Mehta, D. (2023). Toward generalizable machine learning models in speech, language, and hearing sciences: Sample size estimation and reducing overfitting. Journal of Speech, Language, and Hearing Research, 1–29. https://doi.org/10.1044/2023_JSLHR-23-00273
+James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An introduction to statistical learning: With applications in R. Springer. https://doi.org/10.1007/978-1-4614-7138-7
+Schratz, P., Muenchow, J., & Eugenia. (2018). Performance evaluation and hyperparameter tuning of statistical and machine-learning models using spatial data. [Source as provided].
+Vabalas, A., Gowen, E., Poliakoff, E., & Casson, A. (2019). Machine learning algorithm validation with a limited sample size. PLOS ONE, 14. https://doi.org/10.1371/journal.pone.0224365
+Jude, A., & Uddin, J. (2024). Explainable software defects classification using SMOTE and machine learning. Annals of Emerging Technologies in Computing. https://doi.org/10.33166/aetic.2024.01.004
+Miao, N., Yang, M., Han, P., Qiao, J., Che, Z., Xu, F., Dai, X., & Zhu, M. (2025). A new ensemble learning method stratified sampling blending optimizes conventional blending and improves prediction performance. Bioinformatics Advances, 5. https://doi.org/10.1093/bioadv/vbaf002
+Tuyen, N., Dang, N., Minh, D., & Nguyen, T. (2025). Enhancing human activity recognition model performance through KMeans-based stratified data splitting. Measurement and Control. https://doi.org/10.1177/00202940241312873
+Aldrich, C. (2020). Process variable importance analysis by use of random forests in a Shapley regression framework. Minerals. https://doi.org/10.3390/min10050420
+Nembrini, S., König, I., & Wright, M. (2018). The revival of the Gini importance? Bioinformatics, 34, 3711–3718. https://doi.org/10.1093/bioinformatics/bty373
+
+Lundberg, S. M., & Lee, S.-I. (2017a). A unified approach to interpreting model predictions. Advances in Neural Information Processing Systems (NeurIPS). (Also available as arXiv:1705.07874)
+Lundberg, S. M., & Lee, S.-I. (2017b). A unified approach to interpreting model predictions. arXiv preprint arXiv:1705.07874.
+Mokhtari, A., et al. (2019). [Complete bibliographic details needed for the cited source on Shapley value calculation].
+Rodríguez-Pérez, R., & Bajorath, J. (2020). Interpretation of compound activity predictions from complex machine learning models using local approximations and Shapley values. Journal of Medicinal Chemistry, 63(16), 8761–8777. https://doi.org/10.1021/acs.jmedchem.9b01101
+Seyrfar, M., Ataei, M., Movahedi, A., & Derrible, S. (2021). [Complete bibliographic details needed for the cited source on SHAP and variable importance].
+Shapley, L. S. (1953). A value for n-person games. In H. W. Kuhn & A. W. Tucker (Eds.), Contributions to the Theory of Games (Vol. II, pp. 307–317). Princeton University Press.
+Wojtuch, A., Jankowski, R., & Podlewska, S. (2021). How can SHAP values help to shape metabolic stability of chemical compounds? Journal of Cheminformatics, 13, Article 42. https://doi.org/10.1186/s13321-021-00542-y
+
+ 
 
 
 
