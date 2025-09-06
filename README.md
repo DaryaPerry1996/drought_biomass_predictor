@@ -186,6 +186,7 @@ A SHAP summary plot visualizes both the importance and the direction of each fea
 **Figure 9. Log Legacy Effect Linear Regression Graphs** Top Log transformed linear regression between previous year precipitation and Biomass. Bottom Log transformed linear regression between current year precipitation and Biomass.  
 ![Figure 9. Log Legacy Effect Linear Regression Graphs](images/log_Legacy_effect_comparision.jpeg)
 
+# Appendix
 
 ## Relation of annual above ground biomass measurements with varying Drought condition :
 ![image](https://github.com/user-attachments/assets/2a946101-e390-46bc-8fa8-632d5448b3a2)
