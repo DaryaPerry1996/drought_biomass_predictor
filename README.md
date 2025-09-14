@@ -106,7 +106,7 @@ Because $y$ is continuous, we binned $y$ into quantile labels within each `split
 Nested cross-validation is a robust method for hyperparameter tuning and model evaluation, especially on small datasets. In nested cross-validation, the data is split into outer folds for unbiased performance estimation and inner folds for tuning hyperparameters, which helps prevent overfitting and provides a more realistic assessment of model performance. This approach is particularly important for small datasets, where the risk of overfitting is higher and unbiased evaluation is critical for reliable results.(Vabalas, Gowen, Poliakoff, & Casson, 2019) (Ghasemzadeh, Hillman, & Mehta, 2023)
 
 Cross-validation is a resampling-based technique for the estimation of a model’s predictive performance (James et al., 2013). The basic idea behind CV is to split an existing data set into training and test sets using a user defined number of partitions (Figure 2). First, the data set is divided into k partitions or folds. The training set consists of k − 1 partitions and the test set of the remaining partition. The model is trained on the training set and evaluated on the test partition. A repetition consists of k iterations for which every time a model is trained on the training set and evaluated on the test set. Each partition serves as a test set once. (Schratz, Muenchow, & Eugenia, 2018)
-**Figure 4. Diagram of a random forest composed of multiple decision trees.** 
+**Figure 4. Diagram of Nested Cross Validation.** 
 ![Figure 4. Diagram nested cross validation process](images/nested_cv.png)
 
 
