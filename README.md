@@ -214,7 +214,7 @@ This study aims to uncover the nature of influence and the effects of climate fa
   ![image](https://github.com/user-attachments/assets/fac4ff47-4510-4b3d-a189-a0a57840a02b)
 
 
-References (APA 7th)
+# References (APA 7th)
 Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5–32. https://doi.org/10.1023/A:1010933404324
 Han, S., Williamson, B., & Fong, Y. (2021). Improving random forest predictions in small datasets from two-phase sampling designs. BMC Medical Informatics and Decision Making, 21(1), 254. https://doi.org/10.1186/s12911-021-01688-3
 Kim, Y., & Kim, Y. (n.d.). Explainable heat-related mortality with random forest and SHapley Additive exPlanations (SHAP) models. [Figure source cited in text].
