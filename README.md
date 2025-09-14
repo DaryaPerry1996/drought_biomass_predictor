@@ -124,8 +124,7 @@ Outer-fold predictions were summarized as mean ± SD for:
 Only outer test folds enter these summaries, so selection bias from tuning is controlled by design. After evaluation, we refitted the best-found configuration on all available data to obtain the final model used for interpretation. 
 
 ### 2.5.2. Reproducibility
-All modeling used scikit-learn (RF and GridSearchCV) and the shap Python package; random seeds were fixed for the outer and inner splitters and the RF estimator. Following evaluation, the refitted best estimator (trained on the full dataset) was the object of interpretation and is the artifact intended for application. (The paper describes RFs, scikit-learn usage, grid search, and SHAP tooling; our changes are the nested CV protocol and regression metrics.)
-
+All modeling used scikit-learn (RF and GridSearchCV) and the shap Python package; random seeds were fixed for the outer and inner splitters and the RF estimator. Following evaluation, the refitted best estimator (trained on the full dataset) was the object of interpretation and is the artifact intended for application.
 ## 2.6. Model interpretation
 
 ### 2.6.1. Gini Importance in Random Forests: Meaning and Interpretation
